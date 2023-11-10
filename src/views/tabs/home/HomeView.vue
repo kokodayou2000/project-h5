@@ -1,12 +1,22 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import TheTop from '@/views/tabs/home/components/TheTop.vue'
+
+const recommends = [
+  {
+    value: 1,
+    label: '牛腩',
+  },
+  {
+    value: 2,
+    label: '奶茶',
+  },
+]
+</script>
 
 <template>
-  <div>home</div>
-  <div class="test">一二三四五六七八九十</div>
+  <div class="home-page">
+    <TheTop :recommends="recommends" />
+  </div>
 </template>
 
-<style scoped>
-.test {
-  font-size: 39px;
-}
-</style>
+<style scoped></style>

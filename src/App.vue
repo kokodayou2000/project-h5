@@ -13,4 +13,18 @@ fetchTest().then((res) => {
   <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+@import 'normalize.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#app {
+  /* 字体抗锯齿 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+</style>
