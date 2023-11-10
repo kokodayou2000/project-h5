@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
-import { Tabbar, TabbarItem } from 'vant'
 import { useRoute, useRouter } from 'vue-router'
 
 // 路由实例
@@ -19,11 +18,11 @@ watch(active, (newVal) => {
 
 <template>
   <RouterView />
-  <Tabbar v-model="active">
-    <TabbarItem icon="home-o" name="home">首页</TabbarItem>
-    <TabbarItem icon="bars" name="order">订单</TabbarItem>
-    <TabbarItem icon="contact" name="me">我的</TabbarItem>
-  </Tabbar>
+  <VanTabbar v-model="active">
+    <VanTabbarItem icon="home-o" name="home">首页</VanTabbarItem>
+    <VanTabbarItem icon="bars" name="order">订单</VanTabbarItem>
+    <VanTabbarItem icon="contact" name="me">我的</VanTabbarItem>
+  </VanTabbar>
 </template>
 
 <style scoped>
