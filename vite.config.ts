@@ -22,6 +22,7 @@ export default defineConfig({
   },
   server: {
     port: 9009,
+    host: true,
     proxy: {
       '/api': 'http://localhost:8000',
       '/imgs': 'http://localhost:8000',

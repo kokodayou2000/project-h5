@@ -5,6 +5,7 @@ import App from './App.vue'
 
 // import './assets/main.css'
 import 'vant/lib/index.css'
+import { Icon } from 'vant'
 
 const app = createApp(App)
 
@@ -15,4 +16,5 @@ document.documentElement.style.fontSize = (deviceWidth * rootValue) / rootWidth 
 
 app.use(createPinia())
 app.use(router)
+app.use(Icon)
 app.mount('#app')
