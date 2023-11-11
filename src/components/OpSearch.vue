@@ -23,6 +23,9 @@ interface IEmits {
 
   // 事件 update:modelValue 向组件中输入数据的时候
   (e: 'update:modelValue', v?: string | number): void
+
+  // 用户点击搜索栏，会进行页面切换
+  (e: 'inputClick'): void
 }
 
 // 事件对象
@@ -60,6 +63,7 @@ const onClear = () => {
               :value="modelValue"
               class="op-field__control"
               type="search"
+              @click="emits('inputClick')"
               @input="(e) => emits('update:modelValue', (e.target as HTMLInputElement).value)"
               @keydown="onKeydown"
             />

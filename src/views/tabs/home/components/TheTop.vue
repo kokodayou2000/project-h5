@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { ISearchRecommend } from '@/types'
 import OpSearch from '@/components/OpSearch.vue'
-import { ref } from 'vue'
 
 interface IProps {
   recommends: ISearchRecommend[]
@@ -9,28 +8,11 @@ interface IProps {
 
 defineProps<IProps>()
 
-const searchValue = ref('test')
-
-const onSearch = (v?: string | number) => {
-  // eslint-disable-next-line no-console
-  console.log(v)
+interface IEmits {
+  (e: 'searchClick'): void
 }
 
-const onUpdateValue = (v?: string | number) => {
-  // eslint-disable-next-line no-console
-  console.log(v)
-}
-
-const cancel = () => {
-  // eslint-disable-next-line no-console
-  console.log('cancel')
-}
-
-const clear = () => {
-  // eslint-disable-next-line no-console
-  console.log('clear')
-  searchValue.value = ''
-}
+const emits = defineEmits<IEmits>()
 </script>
 
 <template>
@@ -42,18 +24,13 @@ const clear = () => {
       <img class="comments-icon" src="@/assets/imgs/index_page/message-one.png" />
     </div>
     <OpSearch
-      :model-value="searchValue"
       background="linear-gradient(to right, rgb(53, 200, 250), rgb(31, 175, 243))"
       placeholder="烤鸡腿"
       shape="round"
-      show-action
-      @cancel="cancel"
-      @clear="clear"
-      @search="onSearch"
-      @update:model-value="onUpdateValue"
+      @inputClick="emits('searchClick')"
     >
       <template #right-icon>
-        <div>搜索</div>
+        <div @click="emits('searchClick')">搜索</div>
       </template>
     </OpSearch>
     <div class="search-recommend">
