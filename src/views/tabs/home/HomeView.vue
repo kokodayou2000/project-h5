@@ -19,9 +19,23 @@ const [isSearchViewShown, toggleSearchView] = useToggle(false)
 
 <template>
   <div class="home-page">
-    <SearchView v-if="isSearchViewShown" @cancel="toggleSearchView"></SearchView>
+    <Transition name="fade">
+      <SearchView v-if="isSearchViewShown" @cancel="toggleSearchView"></SearchView>
+    </Transition>
     <TheTop :recommends="recommends" @searchClick="toggleSearchView" />
   </div>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+// 动画
+// 在 0.5s中  透明度从0到1
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
