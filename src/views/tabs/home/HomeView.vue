@@ -2,6 +2,9 @@
 import TheTop from '@/views/tabs/home/components/TheTop.vue'
 import { useToggle } from '@/use/useToggle'
 import SearchView from '@/views/search/SearchView.vue'
+import { useAsync } from '@/use/useAsync'
+import { fetchHomePageData } from '@/api/home'
+import type { IHomeInfo } from '@/types'
 
 const recommends = [
   {
@@ -15,6 +18,8 @@ const recommends = [
 ]
 // 用来管理搜索页面是否显示,isSearchViewShown 是状态 toggleSearchView 是action
 const [isSearchViewShown, toggleSearchView] = useToggle(false)
+
+const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
 </script>
 
 <template>
@@ -23,6 +28,8 @@ const [isSearchViewShown, toggleSearchView] = useToggle(false)
       <SearchView v-if="isSearchViewShown" @cancel="toggleSearchView"></SearchView>
     </Transition>
     <TheTop :recommends="recommends" @searchClick="toggleSearchView" />
+    {{ pending }}
+    {{ data }}
   </div>
 </template>
 

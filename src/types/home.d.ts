@@ -12,3 +12,32 @@ export interface ISearchResult {
 export interface ISearchResultList {
   list: ISearchResult[]
 }
+
+export interface IHomeInfo {
+  banner: IBanner
+  searchRecommends: ISearchRecommend[]
+  transformer: ITransformer[]
+  countdown: ICountdown
+  activities: string[]
+}
+
+export interface IBanner {
+  imgUrl: string
+}
+
+export interface ITransformer {
+  imgUrl: string
+  label: string
+}
+
+export interface ICountdown {
+  time: number
+  goods: IGood
+}
+
+export interface IGood {
+  imgUrl: string
+  name: string
+  price: number
+  oldPrice: number
+}
