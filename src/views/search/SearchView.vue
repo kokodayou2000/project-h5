@@ -4,6 +4,7 @@ import { computed, ref, watch } from 'vue'
 import { fetchSearchData } from '@/api/search'
 import type { ISearchResult } from '@/types'
 import { useToggle } from '@/use/useToggle'
+import { useDebounce } from '@/use/useDebounce'
 
 interface IEmits {
   (e: 'cancel'): void
@@ -44,12 +45,24 @@ const onTagClick = (v: string) => {
   onSearch(v)
 }
 
-watch(searchValue, (newVal) => {
-  if (!newVal) {
+// watch(
+//   searchValue,
+//   useDebounce((nv) => {
+//     if (!nv) {
+//       searchResult.value = []
+//       return
+//     }
+//     onSearch(nv as string)
+//   }, 1000),
+// )
+
+const debounceValue = useDebounce(searchValue, 1000)
+watch(debounceValue, (nv) => {
+  if (!nv) {
     searchResult.value = []
     return
   }
-  onSearch(newVal)
+  onSearch(nv)
 })
 </script>
 
