@@ -6,6 +6,7 @@ import App from './App.vue'
 // import './assets/main.css'
 import 'vant/lib/index.css'
 import { Icon } from 'vant'
+import './assets/common.scss'
 
 const app = createApp(App)
 

@@ -4,8 +4,10 @@ import { useToggle } from '@/use/useToggle'
 import SearchView from '@/views/search/SearchView.vue'
 import { useAsync } from '@/use/useAsync'
 import { fetchHomePageData } from '@/api/home'
-import type { IHomeInfo } from '@/types'
+import type { ICountdown, IHomeInfo } from '@/types'
 import OpLoadingView from '@/components/OpLoadingView.vue'
+import TheTransformer from '@/views/tabs/home/components/TheTransformer.vue'
+import ScrollBar from '@/views/tabs/home/components/ScrollBar.vue'
 
 const recommends = [
   {
@@ -20,7 +22,14 @@ const recommends = [
 // 用来管理搜索页面是否显示,isSearchViewShown 是状态 toggleSearchView 是action
 const [isSearchViewShown, toggleSearchView] = useToggle(false)
 
-const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
+const { pending, data } = useAsync(fetchHomePageData, {
+  banner: [],
+  searchRecommends: [],
+  transformer: [],
+  scrollBarInfoList: [],
+  countdown: {} as ICountdown,
+  activities: [],
+} as IHomeInfo)
 </script>
 
 <template>
@@ -30,9 +39,11 @@ const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
     </Transition>
     <TheTop :recommends="recommends" @searchClick="toggleSearchView" />
     <OpLoadingView :loading="pending" type="skeleton">
-      <div>
-        {{ data }}
+      <div class="home-page__banner">
+        <img v-for="v in data.banner" :key="v.imgUrl" :src="v.imgUrl" alt=" " />
       </div>
+      <TheTransformer :data="data.transformer" />
+      <ScrollBar :data="data.scrollBarInfoList" />
     </OpLoadingView>
   </div>
 </template>
@@ -48,5 +59,36 @@ const { pending, data } = useAsync(fetchHomePageData, {} as IHomeInfo)
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.home-page {
+  background: var(--op-gray-bg-color);
+  padding-bottom: 70px;
+
+  &__banner {
+    img {
+      width: 100%;
+      padding-top: 10px;
+      background: white;
+    }
+  }
+
+  &__activity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+
+    &__swipe {
+      border-radius: 8px;
+      width: 180px;
+      height: 170px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
 }
 </style>

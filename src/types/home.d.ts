@@ -14,9 +14,10 @@ export interface ISearchResultList {
 }
 
 export interface IHomeInfo {
-  banner: IBanner
+  banner: IBanner[]
   searchRecommends: ISearchRecommend[]
   transformer: ITransformer[]
+  scrollBarInfoList: IScrollBarInfo[]
   countdown: ICountdown
   activities: string[]
 }
@@ -40,4 +41,16 @@ export interface IGood {
   name: string
   price: number
   oldPrice: number
+}
+
+export interface ITransformer {
+  imgUrl: string
+  label: string
+}
+
+export interface IScrollBarInfo {
+  type: string
+  badge: string
+  detail: string
+  btn: string
 }
