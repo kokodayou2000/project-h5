@@ -19,15 +19,21 @@ const props = withDefaults(defineProps<IProps>(), {
 const heightPx = `${props.height}px`
 const containerRef = ref()
 onMounted(() => {
+  // 获取dom
   const container = containerRef.value
+  // 获取子dom个数 方便确定是否到了末尾
   const count = container.children.length
+  // 记录首节点
   const firstSwipeItem = container.children[0]
+  // 设定高度
   container.style.height = `${count * props.height}px`
   let index = 0
+  // 定时切换位置
   useInterval(() => {
     index++
     // 如果超过 item 个数就需要将第一个元素接到后面
     if (index >= count) {
+      // 移动到最初的位置
       firstSwipeItem.style.transform = `translateY(${index * props.height}px)`
       // 第一个元素滚动动画结束之后，将整个 container 位置重置
       const timeout = setTimeout(() => {
@@ -38,7 +44,9 @@ onMounted(() => {
         clearTimeout(timeout)
       }, props.transitionTime)
     }
+    // 向上移动
     container.style.transform = `translateY(-${index * props.height}px)`
+    // 移动时间
     container.style.transition = `all linear ${props.transitionTime}ms`
     index = index % count
   }, props.intervalTime)

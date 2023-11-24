@@ -8,6 +8,7 @@ import type { ICountdown, IHomeInfo } from '@/types'
 import OpLoadingView from '@/components/OpLoadingView.vue'
 import TheTransformer from '@/views/tabs/home/components/TheTransformer.vue'
 import ScrollBar from '@/views/tabs/home/components/ScrollBar.vue'
+import CountDown from '@/views/tabs/home/components/CountDown.vue'
 
 const recommends = [
   {
@@ -44,6 +45,9 @@ const { pending, data } = useAsync(fetchHomePageData, {
       </div>
       <TheTransformer :data="data.transformer" />
       <ScrollBar :data="data.scrollBarInfoList" />
+      <div class="home-page__activity">
+        <CountDown :data="data.countdown" />
+      </div>
     </OpLoadingView>
   </div>
 </template>
