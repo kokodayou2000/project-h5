@@ -23,16 +23,18 @@ const emits = defineEmits<IEmits>()
       <img class="shopCart-icon" src="@/assets/imgs/index_page/shopping.png" />
       <img class="comments-icon" src="@/assets/imgs/index_page/message-one.png" />
     </div>
-    <OpSearch
-      background="linear-gradient(to right, rgb(53, 200, 250), rgb(31, 175, 243))"
-      placeholder="烤鸡腿"
-      shape="round"
-      @inputClick="emits('searchClick')"
-    >
-      <template #right-icon>
-        <div @click="emits('searchClick')">搜索</div>
-      </template>
-    </OpSearch>
+    <VanSticky>
+      <OpSearch
+        background="linear-gradient(to right, rgb(53, 200, 250), rgb(31, 175, 243))"
+        placeholder="烤鸡腿"
+        shape="round"
+        @inputClick="emits('searchClick')"
+      >
+        <template #right-icon>
+          <div @click="emits('searchClick')">搜索</div>
+        </template>
+      </OpSearch>
+    </VanSticky>
     <div class="search-recommend">
       <div v-for="v in recommends" :key="v.value" class="tag">
         {{ v.label }}
