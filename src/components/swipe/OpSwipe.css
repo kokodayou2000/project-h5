@@ -1,0 +1,30 @@
+.op-swipe {
+  overflow: hidden;
+  position: relative;
+}
+.op-swipe__track {
+  display: flex;
+  position: relative;
+}
+.op-swipe__indicators {
+  position: absolute;
+  bottom: var(--van-swipe-indicator-margin);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.op-swipe__indicator {
+  width: var(--van-swipe-indicator-size);
+  height: var(--van-swipe-indicator-size);
+  margin-right: var(--van-swipe-indicator-size);
+  border-radius: 100%;
+  opacity: var(--van-swipe-indicator-inactive-opacity);
+  background-color: var(--van-swipe-indicator-inactive-background);
+  transition: opacity var(--van-duration-fast), background-color var(--van-duration-fast);
+}
+.op-swipe__indicator--active {
+  opacity: var(--van-swipe-indicator-active-opacity);
+  background-color: var(--van-swipe-indicator-active-background);
+}
+
+/*# sourceMappingURL=OpSwipe.css.map */
