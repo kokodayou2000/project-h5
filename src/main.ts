@@ -7,6 +7,7 @@ import App from './App.vue'
 import 'vant/lib/index.css'
 import { Icon } from 'vant'
 import './assets/common.scss'
+import lazyPlugin from './directives/lazyLoading'
 
 const app = createApp(App)
 
@@ -18,4 +19,5 @@ document.documentElement.style.fontSize = (deviceWidth * rootValue) / rootWidth 
 app.use(createPinia())
 app.use(router)
 app.use(Icon)
+app.use(lazyPlugin)
 app.mount('#app')

@@ -28,7 +28,7 @@ const gotoShop = (id: number | string) => {
 
 <template>
   <div class="home-shop-item" @click="gotoShop(data.id)">
-    <img :src="data.postUrl" class="home-shop-item__poster" />
+    <img v-lazy="data.postUrl" class="home-shop-item__poster" />
     <div class="home-shop-item__info">
       <div class="info__top">
         <div class="info__name op-ellipsis">{{ shopName }}</div>
