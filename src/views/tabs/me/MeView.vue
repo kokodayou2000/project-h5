@@ -4,9 +4,10 @@ import { useRouter } from 'vue-router'
 import { useAsync } from '@/use/useAsync'
 import { fetchMePageData } from '@/api/me'
 import OpLoadingView from '@/components/OpLoadingView.vue'
+import { useAuth } from '@/use/useAuth'
 
 const router = useRouter()
-// const { user, logout } = useAuth()
+const { user, logout } = useAuth()
 const { data, pending } = useAsync(fetchMePageData, {
   cards: [],
   superCard: {} as ISuperCard,
@@ -21,12 +22,19 @@ const gotoLogin = () => {
 <template>
   <div class="me-page op-fullscreen">
     <div class="me-page__top">
-      <img
-        class="avatar"
-        src="https://ts4.cn.mm.bing.net/th?id=OIP-C.Idhcx_UssM3XOX-DXDD62AAAAA&w=80&h=80&c=1&vt=10&bgcl=3cda4c&r=0&o=6&dpr=1.1&pid=5.1"
-      />
-      <div class="name" @click="gotoLogin">请登录</div>
-      <div class="account op-thin-border" @click="gotoLogin">账号登录</div>
+      <template v-if="user.id">
+        <img :src="user.avatar" class="avatar" />
+        <div class="name">{{ user.nickname }}</div>
+        <div class="account op-thin-border" @click="logout">退出登录</div>
+      </template>
+      <template v-else>
+        <img
+          class="avatar"
+          src="https://ts4.cn.mm.bing.net/th?id=OIP-C.Idhcx_UssM3XOX-DXDD62AAAAA&w=80&h=80&c=1&vt=10&bgcl=3cda4c&r=0&o=6&dpr=1.1&pid=5.1"
+        />
+        <div class="name" @click="gotoLogin">请登录</div>
+        <div class="account op-thin-border" @click="gotoLogin">账号登录</div>
+      </template>
     </div>
     <OpLoadingView :loading="pending" type="skeleton">
       <div class="me-page__super-card">
